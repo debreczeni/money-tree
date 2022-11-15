@@ -23,6 +23,12 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: false
+    - name: Load OpenSSL ripemd160
+      run: |
+        sed -i '/^\default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf
+        sed -i '/^\[default_sect\]/a activate = 1' /etc/ssl/openssl.cnf
+        echo "[legacy_sect]" >> /etc/ssl/openssl.cnf
+        echo "activate = 1" >> /etc/ssl/openssl.cnf
     - name: Install Dependencies
       run: |
         bundle install
