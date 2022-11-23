@@ -25,7 +25,7 @@ jobs:
         bundler-cache: false
     - name: Load OpenSSL ripemd160
       run: |
-        sed -i '/^\default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf
+        sudo sed -i '/^\default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf
         sed -i '/^\[default_sect\]/a activate = 1' /etc/ssl/openssl.cnf
         echo "[legacy_sect]" >> /etc/ssl/openssl.cnf
         sudo echo "activate = 1" >> /etc/ssl/openssl.cnf
